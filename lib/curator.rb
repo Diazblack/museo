@@ -30,6 +30,13 @@ class Curator
     find_by_id(string, to_look)
   end
 
+  def find_photographs_by_artist(artist)
+    id_from_artist = artist.id
+    @photographs.find_all do |photo|
+      photo.artist_id == id_from_artist
+    end
+  end 
+
   def find_by_id(string, to_look)
     to_look.find do |data|
       data.id.downcase == string.downcase
