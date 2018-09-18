@@ -35,11 +35,22 @@ class Curator
     @photographs.find_all do |photo|
       photo.artist_id == id_from_artist
     end
-  end 
+  end
 
   def find_by_id(string, to_look)
     to_look.find do |data|
       data.id.downcase == string.downcase
     end
+  end
+
+  def artists_with_multiple_photographs
+    @artists.inject([]) do |array, artist|
+      numb = find_photographs_by_artist(artist).count
+      if numb > 1
+        array << artist
+      else
+        array
+      end
+    end 
   end
 end

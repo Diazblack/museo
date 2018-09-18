@@ -135,5 +135,21 @@ class CuratorTest < Minitest::Test
     expected = "Child with Toy Hand Grenade in Central Park"
     assert_equal expected, photos.last.name
   end
-  
+
+  def test_if_it_can_find_artists_with_multiple_photos
+    @curator.add_photograph(@photo_1)
+    @curator.add_photograph(@photo_2)
+    @curator.add_photograph(@photo_3)
+    @curator.add_photograph(@photo_4)
+    @curator.add_artist(@artist_1)
+    @curator.add_artist(@artist_2)
+    @curator.add_artist(@artist_3)
+
+    artist = @curator.artists_with_multiple_photographs
+
+    assert_instance_of Artist, artist.first
+    assert_equal 1, artist.count
+    assert_equal "Diane Arbus", artist.first.name
+  end
+
 end
