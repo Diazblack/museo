@@ -152,4 +152,24 @@ class CuratorTest < Minitest::Test
     assert_equal "Diane Arbus", artist.first.name
   end
 
+  def test_if_it_can_find_photographs_by_artist_country
+    @curator.add_photograph(@photo_1)
+    @curator.add_photograph(@photo_2)
+    @curator.add_photograph(@photo_3)
+    @curator.add_photograph(@photo_4)
+    @curator.add_artist(@artist_1)
+    @curator.add_artist(@artist_2)
+    @curator.add_artist(@artist_3)
+
+    photos_from_1  = @curator.photographs_taken_by_artists_from("United States")
+
+    photos_from_1.each do |photo|
+      assert_instance_of Photograph, photo
+    end
+    assert_equal 3, photos_from_1.count
+
+    photos_from_2  = @curator.photographs_taken_by_artists_from("Argentina")
+    assert_equal [], photos_from_2
+
+  end
 end

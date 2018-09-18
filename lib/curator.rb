@@ -1,5 +1,6 @@
 require './lib/photograph'
 require './lib/artist'
+require 'pry'
 
 class Curator
   attr_reader :artists,
@@ -51,6 +52,16 @@ class Curator
       else
         array
       end
-    end 
+    end
+  end
+
+  def photographs_taken_by_artists_from(string)
+    @artists.inject([]) do |array, artist|
+      if artist.country.downcase == string.downcase
+        array << find_photographs_by_artist(artist)
+      else
+        array
+      end.flatten
+    end
   end
 end
