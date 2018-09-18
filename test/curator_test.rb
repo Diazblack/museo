@@ -3,7 +3,7 @@ require "minitest/pride"
 
 require './lib/curator'
 
- class CuratorTest < Minitest::Test
+class CuratorTest < Minitest::Test
 
    def setup
      @curator = Curator.new
@@ -73,4 +73,24 @@ require './lib/curator'
     expected_2 = "Henri Cartier-Bresson"
     assert_equal expected_2 , @curator.artists.first.name
   end
- end
+
+  def test_if_it_can_get_an_artist_by_id
+    @curator.add_artist(@artist_1)
+    @curator.add_artist(@artist_2)
+
+    artist = @curator.find_artist_by_id("1")
+
+    assert_instance_of Artist, artist
+    assert_equal "Henri Cartier-Bresson", artist.name
+  end
+
+  def test_if_it_can_get_a_photograph_by_id
+    @curator.add_photograph(@photo_1)
+    @curator.add_photograph(@photo_2)
+
+    photo = @curator.find_photograph_by_id("2")
+
+    assert_instance_of Photograph,  photo
+    assert_equal "Moonrise, Hernandez", photo.name
+  end
+end
