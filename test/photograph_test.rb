@@ -2,7 +2,7 @@ require "minitest/autorun"
 require "minitest/pride"
 
 require './lib/photograph'
-require './lib/artist'
+
 
  class PhotographTest < Minitest::Test
    def setup
@@ -24,5 +24,5 @@ require './lib/artist'
     assert_equal "Rue Mouffetard, Paris (Boy with Bottles)", @photograph.name
     assert_equal "4", @photograph.artist_id
     assert_equal "1954", @photograph.year
-  end 
+  end
 end
