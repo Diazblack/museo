@@ -1,3 +1,4 @@
+require './lib/file_io'
 require './lib/photograph'
 require './lib/artist'
 require 'pry'
@@ -62,6 +63,19 @@ class Curator
       else
         array
       end.flatten
+    end
+  end
+
+  def load_photographs(path)
+    FileIO.load_artists(path).each do |hash|
+      @photographs << Photograph.new(hash)
+    end
+  end
+
+
+  def load_artists(path)
+    FileIO.load_artists(path).each do |hash|
+      @artists << Artist.new(hash)
     end
   end
 end
