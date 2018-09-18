@@ -72,10 +72,30 @@ class Curator
     end
   end
 
-
   def load_artists(path)
     FileIO.load_artists(path).each do |hash|
       @artists << Artist.new(hash)
+    end
+  end
+  def photographs_taken_between(range)
+    range.inject([]) do |array, year|
+      find = find_photos_by_year(year)
+      if find != [] && find != nil
+        array << find
+      else
+        array
+      end
+    end
+  end
+
+  def find_photos_by_year(year_to_find)
+    @photographs.inject([])do |array, photo|
+    binding.pry
+      if photo.year.to_i == year_to_find
+        array << photo
+      else
+        array
+      end
     end
   end
 end

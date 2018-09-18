@@ -194,4 +194,17 @@ class CuratorTest < Minitest::Test
     expected = "Henri Cartier-Bresson"
     assert_equal expected, @curator.artists.first.name
   end
+
+  def test_if_it_can_get_a_photograph_taken_between
+    @curator.load_artists('./data/artists.csv')
+    @curator.load_photographs('./data/photographs.csv')
+
+    photos = @curator.photographs_taken_between(1950..1965)
+
+    assert_equal 2, photos.count
+    photos.each do |photo|
+      assert_instance_of Photograph, photo
+    end
+  end
+
 end
